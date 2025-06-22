@@ -12,3 +12,4 @@ A simple drag-and-drop Kanban board for task management.
 - HTML
 - SCSS
 - JS
+- Firebase
