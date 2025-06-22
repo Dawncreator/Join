@@ -1,4 +1,4 @@
-# 🗂️ Kanban Board App
+# Kanban Board App
 
 A simple drag-and-drop Kanban board for task management.
 
