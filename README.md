@@ -2,7 +2,6 @@
 
 **Join** is a Kanban-style task manager built with plain **HTML**, **CSS** and **vanilla JavaScript**.
 Create tasks, assign them to contacts, split them into subtasks and move them across the board with drag and drop.
-All data is stored in a **Firebase Realtime Database**.
 
 No frameworks and no build step.
 
@@ -75,9 +74,8 @@ No frameworks and no build step.
 
 3. Open `index.html` in your browser and log in or continue as **Guest**.
 
-> The pages load their scripts, styles and images with paths that start with `/`.
-> Because of this the project has to be served from the root of a web server. Opening the files directly from the file system does not work.
-> An internet connection is required, because the data is read from and written to Firebase.
+> All paths to scripts, styles and images are relative, so the project can be served from the root of a web server or from a sub folder.
+> Use a web server rather than opening the files from the file system.
 
 ---
 
@@ -103,7 +101,7 @@ Join/
 ├── index.html / summary.html / board.html /
 │   add-task.html / contacts.html /
 │   help.html / legal.html / privacy.html
-├── script.js                    # Shared code: Firebase access, session handling, user header
+├── script.js                    # Shared code: data access, session handling, user header
 ├── style.css                    # Global styles and fonts
 ├── css/                         # Styles per page and their media queries
 │   ├── loginsignup.css / medialoginsignup.css
@@ -131,7 +129,7 @@ Join/
 
 ## 🧩 Data Model
 
-Data is stored in three folders of the Firebase Realtime Database.
+The data structure used by the app:
 
 ```text
 user      → account, mail, code
@@ -141,7 +139,6 @@ tasks     → title, description, duedate, category, prio, progress,
 ```
 
 The values of `progress` are `to do`, `in progress`, `Await feedback` and `Done`.
-After login the tasks and contacts are kept in the browser's session storage and uploaded to Firebase whenever they change.
 
 ---
 
@@ -150,5 +147,4 @@ After login the tasks and contacts are kept in the browser's session storage and
 - **HTML5**
 - **CSS3** with flexbox, grid and media queries
 - **JavaScript (ES6+)** with `async`/`await` and `fetch`
-- **Firebase Realtime Database** (REST API)
 - **JSDoc** docstrings for all functions

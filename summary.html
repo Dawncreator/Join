@@ -4,54 +4,54 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Summary</title>
-    <link rel="icon" href="/assets/icons/favicon.svg" />
-    <link rel="stylesheet" href="/style.css" />
-    <link rel="stylesheet" href="/css/menu.css" />
-    <link rel="stylesheet" href="/css/summary.css" />
-    <script src="/script.js"></script>
-    <script src="/js/summary.js"></script>
+    <link rel="icon" href="assets/icons/favicon.svg" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="css/menu.css" />
+    <link rel="stylesheet" href="css/summary.css" />
+    <script src="script.js"></script>
+    <script src="js/summary.js"></script>
   </head>
 
   <body onload="(checkIfUserlogin(), init())">
     <header>
       <h2 class="showindesktop">Kanban Project Managment Tool</h2>
-      <img src="/assets/icons/capa 2.svg" alt="" class="showmobile" />
+      <img src="assets/icons/capa 2.svg" alt="" class="showmobile" />
       <div class="header-icon-container">
-        <a class="showindesktop" href="/help.html"><img src="/assets/icons/help.svg" /></a>
+        <a class="showindesktop" href="help.html"><img src="assets/icons/help.svg" /></a>
         <div class="account-info" id="showuser" onclick="showUserMenue()"></div>
       </div>
       <div class="dropdownmenu d-none" id="usermenue">
-        <a href="/legal.html">Legal Notice</a>
-        <a href="/privacy.html">Privacy Policy</a>
-        <a href="/index.html" onclick="logOut()">Log out</a>
+        <a href="legal.html">Legal Notice</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="index.html" onclick="logOut()">Log out</a>
       </div>
     </header>
     <nav>
       <div class="logo showindesktop">
-        <img src="/assets/icons/capa 1.svg" />
+        <img src="assets/icons/capa 1.svg" />
       </div>
       <div class="nav-links-container" id="navlinks">
-        <a class="aktivesheet" href="/summary.html">
+        <a class="aktivesheet" href="summary.html">
           <i class="summaryicon"></i>
           Summary
         </a>
-        <a href="/add-task.html">
+        <a href="add-task.html">
           <i class="taskicon"></i>
           Add Task
         </a>
-        <a href="/board.html">
+        <a href="board.html">
           <i class="boardicon"></i>
           Board
         </a>
-        <a href="/contacts.html">
+        <a href="contacts.html">
           <i class="contactsicon"></i>
           Contacts
         </a>
       </div>
 
       <div class="legal-links showindesktop">
-        <a href="/privacy.html">Privacy Policy</a>
-        <a href="/legal.html">Legal Notice</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="legal.html">Legal Notice</a>
       </div>
     </nav>
     <div class="desktop">
@@ -83,8 +83,8 @@
                   </div>
                 </a>
               </div>
-              <a href="/board.html" class="big box center">
-                <img src="/assets/icons/urgent.svg" alt="" />
+              <a href="board.html" class="big box center">
+                <img src="assets/icons/urgent.svg" alt="" />
                 <div class="center column">
                   <b class="number" id="counturgent">1</b>
                   <p class="mobilefont-size">Urgent</p>
@@ -96,15 +96,15 @@
                 </div>
               </a>
               <div class="center smallbox">
-                <a href="/board.html" class="small box center column">
+                <a href="board.html" class="small box center column">
                   <b class="number" id="countalltask"></b>
                   <p class="mobilefont-size">Task in Board</p>
                 </a>
-                <a href="/board.html" class="small box center column">
+                <a href="board.html" class="small box center column">
                   <b class="number" id="counttaskinprogress">2</b>
                   <p class="mobilefont-size">Task in Progress</p>
                 </a>
-                <a href="/board.html" class="small box center column">
+                <a href="board.html" class="small box center column">
                   <b class="number" id="countfeedback">2</b>
                   <p class="mobilefont-size">Awaiting Feedback</p>
                 </a>

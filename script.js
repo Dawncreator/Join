@@ -14,6 +14,7 @@ async function getData(path) {
   
   try {    
     let response = await fetch(BASE_URL + path + ".json");
+    if (!response.ok) return false;
     let responseAsJson = await response.json();
    return (responseAsJson)
    } catch(error){
@@ -29,6 +30,8 @@ async function getData(path) {
 async function loadTasksandContactsinfos(){
  tasks = await getData("tasks");
  contacts = await getData("contacts");
+ if (!Array.isArray(tasks)) tasks = [];
+ if (!Array.isArray(contacts)) contacts = [];
 
 await saveAsSessionStorage();
 }
@@ -48,7 +51,8 @@ function saveAsSessionStorage(){
  * Hides the navigation and user field when nobody is logged in and redirects to the login page.
  */
 function checkIfUserlogin() {
-  if (user == '' && window.location.pathname == "/Join/legal.html" | window.location.pathname =="/Join/privacy.html") {
+  const path = window.location.pathname;
+  if (user == '' && (path.endsWith("/legal.html") || path.endsWith("/privacy.html"))) {
     document.getElementById('navlinks').classList.add('d-none');
     document.getElementById('showuser').classList.add('d-none');
   } else if (user == '') {
@@ -72,6 +76,8 @@ function checkIfUserlogin() {
   } else {
     tasks = JSON.parse(sessionStorage.getItem("tasks"));
     contacts = JSON.parse(sessionStorage.getItem("contacts"));
+    if (!Array.isArray(tasks)) tasks = [];
+    if (!Array.isArray(contacts)) contacts = [];
     return user = sessionStorage.getItem("user");
   }
 }
