@@ -5,9 +5,9 @@ let user = '';
  user = getDataFromStorage();
 
 /**
- * this function load the wantet Array from firebase
- * 
- * @param {string} path - This set the path which data should be loaded  
+ * Loads data from the Firebase realtime database.
+ * @param {string} path - Path of the data folder to load.
+ * @returns {Promise<Object|Array|boolean>} The loaded data, or false if the request failed.
  */
 async function getData(path) {
   const BASE_URL = "https://remotestorage-fe678-default-rtdb.europe-west1.firebasedatabase.app/";
@@ -23,7 +23,8 @@ async function getData(path) {
 }
 
 /**
- * Load the tasks an contacts from Firebase
+ * Loads tasks and contacts from Firebase and saves them in the session storage.
+ * @returns {Promise<void>} Resolves when the data is saved.
  */
 async function loadTasksandContactsinfos(){
  tasks = await getData("tasks");
@@ -33,7 +34,7 @@ await saveAsSessionStorage();
 }
 
 /**
- * load Arrays into SessionStorage
+ * Saves the tasks and contacts arrays in the session storage.
  */
 function saveAsSessionStorage(){
   let taskssAsText = JSON.stringify(tasks);
@@ -44,7 +45,7 @@ function saveAsSessionStorage(){
 }
 
 /**
- * disbale navmenu and Userfield, when no user or Guest logged in.
+ * Hides the navigation and user field when nobody is logged in and redirects to the login page.
  */
 function checkIfUserlogin() {
   if (user == '' && window.location.pathname == "/Join/legal.html" | window.location.pathname =="/Join/privacy.html") {
@@ -59,10 +60,10 @@ function checkIfUserlogin() {
   }
 }
 
-/**
- * 
- * @returns Empty user and Arrays data from localseasonstorage when no User in SessionStorage
- */
+ /**
+  * Reads user, tasks and contacts from the session storage.
+  * @returns {string} The logged in user or an empty string.
+  */
  function getDataFromStorage() {   
   if (sessionStorage.getItem("user") == undefined) {
     tasks = [];
@@ -76,7 +77,7 @@ function checkIfUserlogin() {
 }
 
 /**
- * Split the Username into first Lesters and use it for Usericon in Header
+ * Shows the initials of the user in the header icon.
  */
 function setHeaderUserName(){
   let userIcon = user.match(/\b(\w)/g);
@@ -85,24 +86,25 @@ function setHeaderUserName(){
 
 
 /**
- * Display the Usermenu under the Usericon
+ * Toggles the user menu below the user icon.
  */
 function showUserMenue(){
   document.getElementById('usermenue').classList.toggle('d-none');
 }
 
 /**
- * Clear the seassionStorage
+ * Clears the session storage.
+ * @returns {Promise<void>} Resolves when the storage is cleared.
  */
 async function logOut() {
  await sessionStorage.clear()
 }
 
 /**
- * 
- * @param {string} path -path to wanted firebase API folder
- * @param {*} data - wicht object or Array should be PUT to the firebase API
- * @returns 
+ * Writes data to the Firebase realtime database.
+ * @param {string} path - Path of the data folder to write.
+ * @param {Object|Array} data - Data that replaces the content of the path.
+ * @returns {Promise<Object>} The response of Firebase.
  */
 async function putData(path="", data={}) {  
   const BASE_URL = "https://remotestorage-fe678-default-rtdb.europe-west1.firebasedatabase.app/"; 
@@ -117,7 +119,7 @@ async function putData(path="", data={}) {
 }
 
   /**
-   *  Save the main Arrays Contacts and taks into SessionStorage, upload to firebase and call the reset of data object
+   * Saves the contacts in the session storage and uploads them to Firebase.
    */
   function saveChangedDataContacts() {
     saveAsSessionStorage();
@@ -125,8 +127,8 @@ async function putData(path="", data={}) {
 }
 
 /**
- * 
- * @returns random combined color for new contacts
+ * Creates a random hex color for new contacts.
+ * @returns {string} Color code like #1A2B3C.
  */
 function getRandomColor() {
   let letters = '0123456789ABCDEF';
@@ -138,9 +140,9 @@ function getRandomColor() {
 }
 
   /**
-   * 
-   * @param {string} name - name of the current contact
-   * @returns - uername with (You) or only the name of contact
+   * Adds (You) to the name if the contact is the logged in user.
+   * @param {string} name - Name of the contact.
+   * @returns {string} The name, with (You) if it is the user.
    */
   function checkIfContactisUser(name) {
     if (name == user) {

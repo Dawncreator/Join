@@ -1,5 +1,6 @@
 /**
- *  This function check if the input value match with the registered user
+ * Checks the login data and opens the summary page if they match a registered user.
+ * @returns {Promise<void>} Resolves when the check is done.
  */
 async function checkValidLogIn(){
     let users = await getData("user")
@@ -13,8 +14,8 @@ async function checkValidLogIn(){
     }
   }
 
-  /**
- * This function is used to switch between Login screen and Signup Screen.
+/**
+ * Switches between the login and the sign up screen.
  */
 function switchLoginSignupWindow() {
     document.getElementById('loginscreen').classList.toggle('d-none');
@@ -23,8 +24,9 @@ function switchLoginSignupWindow() {
 }
 
 /**
- * 
- * @param {array} users - userarray from Firebase
+ * Compares the entered mail and password with all registered users.
+ * @param {Object[]} users - Users loaded from Firebase.
+ * @returns {boolean} True if a user matches.
  */
 function checkLoginData(users){
   let check = false;
@@ -41,9 +43,9 @@ function checkLoginData(users){
 }
 
 /**
- * 
- * @param {string} element - string wich pass the if statement
- * @param {*} email - get the current loginmail
+ * Stores the matching user in the session and remembers the mail if wanted.
+ * @param {Object} element - The matching user.
+ * @param {string} email - The entered mail address.
  */
 function userAndPasswordMatch(element, email){  
   user = element.account;
@@ -52,7 +54,7 @@ function userAndPasswordMatch(element, email){
 }
 
 /**
- * show red boarder and text , when wrong user / password
+ * Shows the red border and error text for three seconds after a failed login.
  */
 function wrongUserOrPassword(){
     document.getElementById('loginform').classList.add('wronglogin');
@@ -66,9 +68,8 @@ function wrongUserOrPassword(){
 }
 
 /**
- * Change attribute of inputfield , to Show the value if wanted
- * 
- * @param {string} id  write id in html in the onclick function, to adress the wanted id with 'here id'
+ * Switches a password field between hidden and visible text.
+ * @param {string} id - Id of the password input.
  */
 function hideShowPassword(id){
   const password = document.getElementById(id);
@@ -78,9 +79,8 @@ function hideShowPassword(id){
 }
 
 /**
- * Change the Icon's , when there is input in the passwordfield 
- * 
- * @param {string} id  write id in html in the onclick function, to adress the wanted id with 'here id'
+ * Shows the eye icon only while the password field has content.
+ * @param {string} id - Id of the password input.
  */
 function addEyeIcons(id){
   const passwordfield = document.getElementById(`${id}`);  
@@ -96,7 +96,8 @@ function addEyeIcons(id){
 }
 
 /**
- * Disable button for signup when passwords not match, show message when wrong.
+ * Checks whether both sign up passwords are equal and shows a message if not.
+ * @returns {boolean} True if the passwords match.
  */
 function checkPasswordMatch() {
   const firstPass = document.getElementById('setpassword').value;
@@ -116,7 +117,8 @@ function checkPasswordMatch() {
 }
 
 /**
- * This function set the User to guest and loads the Array
+ * Logs in as guest and opens the summary page.
+ * @returns {Promise<void>} Resolves when the data is loaded.
  */
 async function guestLogIn() {
   sessionStorage.setItem("user", 'Guest')
@@ -125,7 +127,7 @@ async function guestLogIn() {
 }
 
 /**
- * check if in localstorage information for remember login 
+ * Fills the mail field from the local storage if remember me was chosen.
  */
 function remeberMeCheck() {
   const rmCheck = document.getElementById("remember"),
@@ -141,8 +143,8 @@ function remeberMeCheck() {
 }
 
 /**
- * 
- * @param {string} emailInput -get the value from Emailinput
+ * Saves or clears the mail address in the local storage depending on the checkbox.
+ * @param {string} emailInput - The entered mail address.
  */
 function rememberMe(emailInput) {
   const rmCheck = document.getElementById("remember");
@@ -157,7 +159,8 @@ function rememberMe(emailInput) {
 }
 
 /**
- * Give the signup Input Data to the firebase
+ * Saves the new user in Firebase and shows the success message.
+ * @returns {Promise<void>} Resolves when the user is prepared for upload.
  */
 async function signUp() {
   let username = document.getElementById('signupname').value;
@@ -177,7 +180,7 @@ async function signUp() {
 }
 
 /**
- * show message , when signUp succses , link back to Login
+ * Shows the success message and returns to the login page.
  */
 function signUpSuccses() {
   signUpDone = document.getElementById('signupdone').classList.toggle('d-none');
@@ -186,7 +189,7 @@ function signUpSuccses() {
 }
 
 /**
- * Check SignupValidation and disable or enable submitbutton
+ * Validates the sign up form and enables or disables the submit button.
  */
 function checkSignUp() {
   const submitButton = document.getElementById('submitsignup');
@@ -207,9 +210,8 @@ function checkSignUp() {
 }
 
 /**
- * Validatiocheck of signupfields , show label if not true , or hide them
- * 
- * @param {array} array - get an array with dom path id's
+ * Shows or hides the error labels and red borders of the sign up fields.
+ * @param {string[]} array - Ids of the sign up fields.
  */
 function checkIfNotValid(array) {
   array.forEach(element => { if (!document.getElementById(element).checkValidity()) {
@@ -230,9 +232,8 @@ function checkIfNotValid(array) {
 }
 
 /**
- * check if the signupfield are empty
- * 
- * @param {array} arrayids - get an array with dom path id's
+ * Removes all error marks when the sign up fields are empty.
+ * @param {string[]} arrayids - Ids of the sign up fields.
  */
 function checkIfSignUpEmpty(arrayids) {
 
@@ -248,8 +249,9 @@ function checkIfSignUpEmpty(arrayids) {
   }
 }
 
-/** * 
- * @returns Array with id's from signupfields
+/**
+ * Returns the ids of the sign up fields.
+ * @returns {string[]} Ids of name, mail, password and checkbox.
  */
 function getSignUpIds() {  
   const name = 'signupname';

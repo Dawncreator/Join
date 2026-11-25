@@ -1,5 +1,5 @@
 /**
- * show the sucess massage
+ * Shows the success message.
  */
 function showMessage() {
     let popUp = document.getElementById('successfull-message');
@@ -8,7 +8,7 @@ function showMessage() {
 }
 
 /**
- *  Hide the sucsess message again
+ * Hides the success message.
  */
 function hideMessage() {
     let popUp = document.getElementById('successfull-message');
@@ -21,7 +21,7 @@ function hideMessage() {
 }
 
 /**
- * change the mobile button back to create contact
+ * Shows the contact list again and resets the mobile button.
  */
 function goBack() {
     let register = document.getElementById('contacts-register');
@@ -31,16 +31,15 @@ function goBack() {
 }
 
 /**
- * Sort the contact array
+ * Sorts the contacts by name.
  */
 function sortContacts() {
     contacts.sort((a, b) => a.name.localeCompare(b.name));
 }
 
 /**
- * render the Big contact infos from aktive choosen contact
- * 
- * @param {string} index - id from aktive contact
+ * Marks a contact as active and renders the list.
+ * @param {number} index - Index of the contact.
  */
 function setActiveContact(index) {
     activeContactIndex = index;
@@ -49,7 +48,7 @@ function setActiveContact(index) {
 
 
 /**
- * Clear the Big contact card
+ * Clears the contact detail card.
  */
 function clearContactCard() {
     let contactCard = document.getElementById('open-contact');
@@ -57,9 +56,9 @@ function clearContactCard() {
 }
 
 /**
- * 
- * @param {string} name - Name from Contact
- * @returns the First letter / letters of the full name
+ * Returns the initials of a name.
+ * @param {string} name - Name of the contact.
+ * @returns {string} Up to two capital letters.
  */
 function getInitials(name) {
     let nameParts = name.trim().split(' ');
@@ -72,10 +71,10 @@ function getInitials(name) {
 }
 
 /**
- * 
- * @param {string} i - index of choosen contact
- * @param {string} isActive - state from isActive 
- * @returns 
+ * Creates the HTML of a contact entry including the letter heading.
+ * @param {number} i - Index of the contact.
+ * @param {boolean} isActive - True if the contact is selected.
+ * @returns {string} The HTML.
  */
 function contactRegisterHtml(i, isActive = false) {
     const currentInitial = contacts[i].name.charAt(0).toUpperCase();
@@ -86,9 +85,8 @@ function contactRegisterHtml(i, isActive = false) {
 }
 
 /**
- * filter the tasks for deleted Contact , and erease it from assigned array
- * 
- * @param {string} index - from current contact
+ * Removes a contact from the assigned contacts of all tasks.
+ * @param {number} index - Index of the contact.
  */
 function ereaseContactFromArrayAssigned(index) {
     const name = contacts[index].name;
@@ -108,9 +106,9 @@ function ereaseContactFromArrayAssigned(index) {
 }
 
 /**
- * 
- * @param {string} number - phonenumber from inputfield
- * @returns - number withoiut 0 oder 4X in the beginning
+ * Removes a leading 0 or country code from a phone number.
+ * @param {string} number - Phone number from the input.
+ * @returns {string} The cleaned number.
  */
 function checkPhoneNumber(number) {
     
@@ -124,7 +122,8 @@ function checkPhoneNumber(number) {
 } 
 
 /**
- * Check Create/Edit contact and disable or enable submitbutton
+ * Validates the contact form and enables or disables the submit button.
+ * @param {string} id - Id of the form.
  */
 function checkForm(id) {
     const submitbutton = document.getElementById('create-save-button');
@@ -141,8 +140,9 @@ function checkForm(id) {
     }
 }
 
-/** * 
- * @returns Array with id's from create/edit contactsinputs
+/**
+ * Returns the ids of the contact form inputs.
+ * @returns {string[]} Ids of name, mail and phone.
  */
 function getFormIds() {
     const name = 'name-input';
@@ -153,9 +153,8 @@ function getFormIds() {
 }
 
 /**
- * Validatiocheck of create/EditContact , show label if not true , or hide them
- * 
- * @param {array} array - get an array with dom path id's
+ * Shows or hides the error labels of the contact form.
+ * @param {string[]} array - Ids of the form fields.
  */
 function checkIfNotValidCreateOrEditContact(array) {
     array.forEach(element => { if (!document.getElementById(element).checkValidity()) {
@@ -169,9 +168,8 @@ function checkIfNotValidCreateOrEditContact(array) {
 }
 
 /**
- * check if the signupfield are empty
- * 
- * @param {array} arrayids - get an array with dom path id's
+ * Removes all error marks when the contact form is empty.
+ * @param {string[]} arrayids - Ids of the form fields.
  */
 function checkifCreateIsEmpty(arrayids) {
     if (document.getElementById(arrayids[0]).value == '' &&

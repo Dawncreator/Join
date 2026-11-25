@@ -1,5 +1,11 @@
 /*CONTACT HTML*/
 
+/**
+ * Creates the HTML of a contact entry.
+ * @param {number} i - Index of the contact.
+ * @param {boolean} isActive - True if the contact is selected.
+ * @returns {string} The HTML.
+ */
 function createContactStripeHtml(i, isActive) {
     const contact = contacts[i];
     const activeClass = isActive ? 'active-contact' : '';
@@ -15,6 +21,12 @@ function createContactStripeHtml(i, isActive) {
     </div>`;
 }
 
+/**
+ * Creates the HTML of the create or edit contact overlay.
+ * @param {Object|null} contact - Contact to edit, or null to create one.
+ * @param {number|null} index - Index of the contact to edit.
+ * @returns {string} The HTML.
+ */
 function overlayHtml(contact = null, index = null) {
     let headerText = index !== null ? 'Edit contact' : 'Add contact';
     let contactInitials = contact ? contact.name.split(' ').map(n => n[0]).join('') : '';
@@ -62,6 +74,12 @@ function overlayHtml(contact = null, index = null) {
     `;
 }
 
+/**
+ * Creates the HTML of the contact detail card.
+ * @param {Object} contact - The contact.
+ * @param {number} index - Index of the contact.
+ * @returns {string} The HTML.
+ */
 function contactCardHtml(contact, index) {   
     return /*Html*/`
         <div class="open-contact-headline center">
@@ -88,6 +106,12 @@ function contactCardHtml(contact, index) {
     `;
 }
 
+/**
+ * Creates the letter heading if the initial changes.
+ * @param {string} currentInitial - Initial of the current contact.
+ * @param {string} lastInitial - Initial of the previous contact.
+ * @returns {string} The HTML or an empty string.
+ */
 function createFontStripeHtml(currentInitial, lastInitial) {
     let html = '';
     if (currentInitial !== lastInitial) {
@@ -97,6 +121,11 @@ function createFontStripeHtml(currentInitial, lastInitial) {
     return html;
 }
 
+/**
+ * Creates the HTML of the mobile edit menu.
+ * @param {number} index - Index of the contact.
+ * @returns {string} The HTML.
+ */
 function mobileMenuPopUpHtml(index) {
     return /*HTML*/`
        <p class="mobile-link edit" onclick="showOverlay(); editContact(${index})">Edit</p>
@@ -106,12 +135,25 @@ function mobileMenuPopUpHtml(index) {
 
 /* Add Tasks HTML */
 
+/**
+ * Creates the HTML of an assigned contact icon.
+ * @param {string} shortname - Initials of the contact.
+ * @param {string} color - Color of the contact.
+ * @returns {string} The HTML.
+ */
 function renderAssignedContactshtml(shortname,color) {
     return /*html*/`
        <div class="contacticon center" style="background-color:${color};">${shortname}</div>
     `
   }  
 
+/**
+ * Creates the HTML of a contact in the assigned to list.
+ * @param {string} name - Name of the contact.
+ * @param {string} shortname - Initials of the contact.
+ * @param {string} color - Color of the contact.
+ * @returns {string} The HTML.
+ */
 function renderHtmlContactLi(name,shortname,color) {
   return /*html*/`
     <li class="contactslistassign">
@@ -123,6 +165,12 @@ function renderHtmlContactLi(name,shortname,color) {
       </li>
   `
 }
+/**
+ * Creates the HTML of the logged in user in the assigned to list.
+ * @param {string} name - Name of the user.
+ * @param {string} shortname - Initials of the user.
+ * @returns {string} The HTML.
+ */
 function renderHtmlContactLiUser(name,shortname) {
   return /*html*/`
     <li class="contactslistassign">
@@ -134,6 +182,12 @@ function renderHtmlContactLiUser(name,shortname) {
       </li>
   `
 }
+/**
+ * Creates the HTML of a subtask in the add task form.
+ * @param {string} subtask - Title of the subtask.
+ * @param {number} i - Position in the subtask array.
+ * @returns {string} The HTML.
+ */
 function subTaskHtml(subtask,i) {
   return /*html*/`
     <li>
@@ -155,18 +209,35 @@ function subTaskHtml(subtask,i) {
 
 /**   board HTML   */
 
+/**
+ * Creates the HTML of the empty column message.
+ * @param {string} text - Text after No tasks.
+ * @returns {string} The HTML.
+ */
 function showNoTaskContainerHTML(text) {
   return /*html*/`
       <div class="no-tasks-container">No tasks ${text}</div>
   `;
 }
 
+/**
+ * Creates the HTML of a small assigned contact icon.
+ * @param {string} color - Color of the contact.
+ * @param {string} shortname - Initials of the contact.
+ * @returns {string} The HTML.
+ */
 function renderAssignedContactsSmallCard(color,shortname) {
     return /*html*/`
         <div class="circle circle-to-do" style="background-color:${color}">${shortname}</div>
     `
 }
 
+/**
+ * Creates the HTML of the subtask counter.
+ * @param {number} amount - Number of done subtasks.
+ * @param {number} totalSubtask - Number of all subtasks.
+ * @returns {string} The HTML.
+ */
 function totalSubtaskHTML(amount,totalSubtask) {
     return /*html*/`
         <div>
@@ -175,6 +246,12 @@ function totalSubtaskHTML(amount,totalSubtask) {
     `;
 }
 
+/**
+ * Creates the HTML of a task card.
+ * @param {Object} element - The task.
+ * @param {number} indexOfTask - Index of the task.
+ * @returns {string} The HTML.
+ */
 function renderCardHTML(element, indexOfTask) {
     return /*html*/`
     <div id="cardContainer${indexOfTask}"  class="card-container center" draggable="true" ondragstart="startDragging(${indexOfTask})">
@@ -218,12 +295,24 @@ function renderCardHTML(element, indexOfTask) {
     `;
 }
 
+/**
+ * Creates the HTML of the assigned contacts counter.
+ * @param {Object} users - The task with the assigned contacts.
+ * @returns {string} The HTML.
+ */
 function countAssignedContactsHTML(users) {
     return /*html*/`
         ${users['Assigned To'].length} <img src="./assets/icons/person.svg">
     `
 }
 
+/**
+ * Creates the HTML of a subtask in the detail view.
+ * @param {number} i - Index of the subtask.
+ * @param {Object} element - The subtask.
+ * @param {number} indexOfTask - Index of the task.
+ * @returns {string} The HTML.
+ */
 function renderSubTasksBigCars(i,element,indexOfTask) {
     return /*html*/`
             <div class="checkbox-title-container">
@@ -234,6 +323,13 @@ function renderSubTasksBigCars(i,element,indexOfTask) {
     `
 }
 
+/**
+ * Creates the HTML of an assigned contact in the detail view.
+ * @param {string} name - Name of the contact.
+ * @param {string} color - Color of the contact.
+ * @param {string} shortname - Initials of the contact.
+ * @returns {string} The HTML.
+ */
 function renderAssignedNamesAndColorsBigCard(name,color,shortname) {
     return /*html*/`
             <div class="assigned-row-overlay">
@@ -243,6 +339,11 @@ function renderAssignedNamesAndColorsBigCard(name,color,shortname) {
     `
 }
 
+/**
+ * Creates the HTML of the task detail view.
+ * @param {number} indexOfTask - Index of the task.
+ * @returns {string} The HTML.
+ */
 function rendertaskOverlayHTML(indexOfTask) {
     return /*html*/`
     <div class="task-overlay-container" onclick="doNotClose(event)" id="overlaycontainer">
@@ -284,6 +385,11 @@ function rendertaskOverlayHTML(indexOfTask) {
 `;
 }
 
+/**
+ * Creates the HTML of the edit task form.
+ * @param {number} i - Index of the task.
+ * @returns {string} The HTML.
+ */
 function renderEditTasksHtml(i) {
     return /*html*/`        
         <div class="add-task-bg" style="width:unset; padding:0 0 0 5px; position:relative;" onclick="checkAssignedDropDownWindowOpen(),doNotClose(event)"  id="overlaycontainer">
@@ -357,6 +463,10 @@ function renderEditTasksHtml(i) {
     `
 }
 
+/**
+ * Creates the HTML of the add task form in the board overlay.
+ * @returns {string} The HTML.
+ */
 function renderAddtaskformHTML() {
     return /*html*/`
         <div class="add-task-bg" style="width: unset;position:relative;" onclick="checkAssignedDropDownWindowOpen(),doNotClose(event)" id="overlaycontainer">

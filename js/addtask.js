@@ -2,7 +2,7 @@ let assignedToArray = [];
 let subtaskArray = [];
 
 /**
- * Show and hide the dropdownmenu of Assigned to
+ * Opens or closes the assigned to drop down menu.
  */
 function showContactslistToAssign() {
   document.getElementById("contact-select").classList.toggle("visible");
@@ -14,7 +14,7 @@ function showContactslistToAssign() {
 }
 
 /**
- * render the Contacts to assign to dropdown menü
+ * Renders all contacts into the assigned to list.
  */
 function renderAndloadContactsToAssign() {
   const list = document.getElementById("assignlist");
@@ -31,18 +31,17 @@ function renderAndloadContactsToAssign() {
 }
 
 /**
- *
- * @param {string} name - from Contacts or User
- * @returns - First letter of each Word
+ * Returns the first letter of each word of a name.
+ * @param {string} name - Name of a contact or user.
+ * @returns {string} The initials.
  */
 function shortNames(name) {
   return name.match(/\b(\w)/g).join("");
 }
 
 /**
- * Funktion to put ore delete the contacs to the assignedToArray if not allready in
- *
- * @param {string} name - ID from chosen Contact
+ * Adds a contact to the assigned array or removes it again.
+ * @param {string} name - Name and checkbox id of the contact.
  */
 function assignedToTasK(name) {
   const userchoise = assignedToArray.filter((assignedToArray) => assignedToArray == name);
@@ -61,7 +60,7 @@ function assignedToTasK(name) {
 }
 
 /**
- * Where to render the ContactsIcon from assignedToArray
+ * Renders the icons of all assigned contacts.
  */
 function renderAssignedContacts() {
   const assignedConntacts = document.getElementById("showassignedcontacts");
@@ -76,7 +75,7 @@ function renderAssignedContacts() {
 }
 
 /**
- * Search function for Contacts -->
+ * Filters the contact list by the search input.
  */
 function filterContacts() {
   let search = document.getElementById("anchorinput").value.toLowerCase();
@@ -91,9 +90,9 @@ function filterContacts() {
 }
 
 /**
- *
- * @param {string} list - area where the seachresults shown
- * @param {string} search - inputvalue
+ * Renders the contacts whose name contains the search text.
+ * @param {HTMLElement} list - List that shows the results.
+ * @param {string} search - Search text in lower case.
  */
 function searchfor(list, search) {
   for (let index = 0; index < contacts.length; index++) {
@@ -109,7 +108,7 @@ function searchfor(list, search) {
 }
 
 /**
- *  Check if name already in array and check ist when true
+ * Checks the checkboxes of all assigned contacts.
  */
 function checkboxChecked() {
   assignedToArray.forEach((id) => {
@@ -121,10 +120,9 @@ function checkboxChecked() {
 }
 
 /**
- * filter contacts array for colorinformation
- *
- * @param {string} name - get the current name from foreach
- * @returns - the colorcode
+ * Returns the color of a contact.
+ * @param {string} name - Name of the contact.
+ * @returns {string} The color code, or lightcoral if the contact is unknown.
  */
 function getColorOfContact(name) {
   const filtercontacs = contacts.filter((contact) => contact.name == name);
@@ -136,8 +134,8 @@ function getColorOfContact(name) {
 }
 
 /**
- *
- * @param {string} id -get the id from html
+ * Marks the chosen priority button as active.
+ * @param {string} id - Id of the chosen priority button.
  */
 function changePrio(id) {
   const urgentprio = document.getElementById("urgent").classList;
@@ -149,10 +147,10 @@ function changePrio(id) {
 }
 
 /**
- *
- * @param {string} urgentprio - get the information which field change in html
- * @param {string} mediumprio - get the information which field change in html
- * @param {string} lowprio - get the information which field change in html
+ * Removes the active class from all priority buttons.
+ * @param {DOMTokenList} urgentprio - Class list of the urgent button.
+ * @param {DOMTokenList} mediumprio - Class list of the medium button.
+ * @param {DOMTokenList} lowprio - Class list of the low button.
  */
 function resetPrio(urgentprio, mediumprio, lowprio) {
   urgentprio.remove("urgentprioaktive");
@@ -161,11 +159,11 @@ function resetPrio(urgentprio, mediumprio, lowprio) {
 }
 
 /**
- *
- * @param {string} urgentprio - get the information which field to change
- * @param {string} mediumprio - get the information which field to change
- * @param {string} lowprio - get the information which field to change
- * @param {string} id - get the information which field's id change to active
+ * Activates the chosen priority and stores it in the data object.
+ * @param {DOMTokenList} urgentprio - Class list of the urgent button.
+ * @param {DOMTokenList} mediumprio - Class list of the medium button.
+ * @param {DOMTokenList} lowprio - Class list of the low button.
+ * @param {string} id - Id of the chosen priority button.
  */
 function switchPrio(urgentprio, mediumprio, lowprio, id) {
   switch (id) {
@@ -187,7 +185,7 @@ function switchPrio(urgentprio, mediumprio, lowprio, id) {
 }
 
 /**
- *  Show and hide the subtasks Icons
+ * Shows the subtask icons only while the subtask input has content.
  */
 function changeIconsSubtask() {
   const inputfield = document.getElementById("subtaskinputfield").value;
@@ -201,7 +199,7 @@ function changeIconsSubtask() {
 }
 
 /**
- *  reset the Value from addsubtasks Input
+ * Clears the subtask input field.
  */
 function resetSubTasksInput() {
   const inputfield = document.getElementById("subtaskinputfield");
@@ -211,7 +209,7 @@ function resetSubTasksInput() {
 }
 
 /**
- * Add the inputvalue from Subtask to subtaskarray and call rendersubtasks if value not empty
+ * Adds the subtask input to the subtask array and renders the list.
  */
 function addSubTaskToList() {
   const newsubtask = document.getElementById("subtaskinputfield");
@@ -225,7 +223,7 @@ function addSubTaskToList() {
 }
 
 /**
- * Render the the tasks from tasksarray
+ * Renders all subtasks of the subtask array.
  */
 function renderSubTasks() {
   const subtaskfield = document.getElementById("showsubtasks");
@@ -239,9 +237,8 @@ function renderSubTasks() {
 }
 
 /**
- * Delete the Subtask from Array
- *
- * @param {string} index - position in subtasksarray
+ * Deletes a subtask from the subtask array.
+ * @param {number} index - Position in the subtask array.
  */
 function delteSubTask(index) {
   subtaskArray.splice(index, 1);
@@ -249,9 +246,8 @@ function delteSubTask(index) {
 }
 
 /**
- * change the Inputfield to enable , and change shown Icons for edit
- *
- * @param {string} index - position in subtasksarray
+ * Switches a subtask into edit mode.
+ * @param {number} index - Position in the subtask array.
  */
 function editSubTask(index) {
   document.getElementById(`dotsub${index}`).classList.toggle("d-none");
@@ -261,9 +257,8 @@ function editSubTask(index) {
 }
 
 /**
- * Save the changes from Inputfield , when in edit Mode
- *
- * @param {string} index - position in subtasksarray
+ * Saves an edited subtask, or deletes it if the text is empty.
+ * @param {number} index - Position in the subtask array.
  */
 function saveEditSubtask(index) {
   const editsubtask = document.getElementById(`subtask${index}`).value;
@@ -277,11 +272,10 @@ function saveEditSubtask(index) {
 }
 
 /**
- * Make the addsubtask possible to check witch press enter
- *
- * @param {event} e - check which key pressed
- * @param {string} check - info which field create or edit (set in HTML)
- * @param {string} index - position in subtasksarray
+ * Adds or saves a subtask when the enter key is pressed.
+ * @param {KeyboardEvent} e - The key event.
+ * @param {string} check - Either create or edit.
+ * @param {number} index - Position in the subtask array.
  */
 function checkPressEnter(e, check, index) {
   if (e.keyCode == 13 && check == "create") {
@@ -292,7 +286,7 @@ function checkPressEnter(e, check, index) {
 }
 
 /**
- * Get the Id's from the required field and check if all have value
+ * Checks whether all required fields are filled.
  */
 function checkRequiredfields() {
   const inputtitle = document.getElementById("inputtitle");
@@ -303,7 +297,7 @@ function checkRequiredfields() {
 }
 
 /**
- * reload the side and clear it , after check which is current side
+ * Resets the whole add task form.
  */
 function clearSide() {
   changePrio("medium");
@@ -316,7 +310,7 @@ function clearSide() {
 }
 
 /**
- * reset the inputfield , wihin function clearSide()
+ * Empties all input fields of the add task form.
  */
 function resetInputfieldsToclearSide() {
   document.getElementById("inputtitle").value = "";
@@ -327,7 +321,7 @@ function resetInputfieldsToclearSide() {
 }
 
 /**
- * get all Inputvalue and arrayinfo into data then push it into tasksarray , put to firebase
+ * Collects the form values, adds the new task and saves it to Firebase.
  */
 function createNewTask() {
   if (!Array.isArray(tasks)) {
@@ -349,7 +343,7 @@ function createNewTask() {
 }
 
 /**
- * Show message for Succsessfully create new task
+ * Shows the success message and opens the board page.
  */
 function linkToBoardOrReload() {
   document.getElementById("createdtaskmessage").classList.remove("d-none");
@@ -359,7 +353,7 @@ function linkToBoardOrReload() {
 }
 
 /**
- * empty the arrays
+ * Empties the assigned contacts and subtask arrays.
  */
 function resetEditArray() {
   assignedToArray = [];
@@ -367,8 +361,8 @@ function resetEditArray() {
 }
 
 /**
- *
- * @returns - return the orginal empty data object , to prevent posible problems
+ * Resets the data object to an empty task.
+ * @returns {Object} The new empty data object.
  */
 function dataObjectReset() {
   return (data = {

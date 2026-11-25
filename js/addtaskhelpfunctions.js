@@ -1,5 +1,5 @@
   /**
-   *  Save the main Arrays Contacts and taks into SessionStorage, upload to firebase and call the reset of data object
+   * Saves the tasks in the session storage and Firebase and resets the data object.
    */
   function saveChangedData() {
     saveAsSessionStorage();
@@ -7,7 +7,7 @@
     dataObjectReset()
 }
   /**
-   * Check if the Assignedto container is visible and close it when click on other content
+   * Closes the assigned to drop down menu if it is open.
    */
   function checkAssignedDropDownWindowOpen() {
     const dropdownmenü = document.getElementById('contact-select');
@@ -20,17 +20,16 @@
     }
   }
 
-  /**
- * 
- * @param {event} event -prevent child from closing  , when parent have onclickfunction to close
+/**
+ * Stops a click from reaching the parent element.
+ * @param {Event} event - The click event.
  */
 function doNotClose(event) {
   event.stopPropagation();
 }
 
 /**
- * 
- * @returns - current date for limit the date in add tasks
+ * Sets today as the minimum of the date input.
  */
 function returnCurrentDate() {
   const mindate = document.getElementById('inputdate');
@@ -50,10 +49,10 @@ function returnCurrentDate() {
 }
 
   /**
-   * 
-   * @param {string} inputtitle - dom path to current id
-   * @param {string} date - dom path to current id
-   * @param {string} category - dom path to current id
+   * Enables or disables the create button and marks missing required fields.
+   * @param {HTMLInputElement} inputtitle - Title input field.
+   * @param {HTMLInputElement} date - Due date input field.
+   * @param {HTMLSelectElement} category - Category select field.
    */
   function ifElseHelpFunctionCheckRequiedFields(inputtitle,date,category) {
     if (inputtitle.value !== '' && date.value !== '' && category.value !== '' && checkDate(date) == true) {
@@ -74,10 +73,9 @@ function returnCurrentDate() {
   }
 
   /**
-   * check if the input date is higher or current date
-   * 
-   * @param {string} date - path to dom id from inputdate
-   * @returns true or false
+   * Checks whether the due date is today or later.
+   * @param {HTMLInputElement} date - Due date input field.
+   * @returns {boolean} True if the date is valid.
    */
   function checkDate(date) {
     let date1 = new Date(date.value)
@@ -91,10 +89,10 @@ function returnCurrentDate() {
   }
 
   /**
-   * 
-   * @param {string} inputtitle - document path to id
-   * @param {string} date - document path to id
-   * @param {string} category - document path to id
+   * Removes the red border from the required fields.
+   * @param {HTMLInputElement} inputtitle - Title input field.
+   * @param {HTMLInputElement} date - Due date input field.
+   * @param {HTMLSelectElement} category - Category select field.
    */
   function removeRedBorderReqed(inputtitle,date,category) {
     inputtitle.classList.remove('borderred');
@@ -103,9 +101,8 @@ function returnCurrentDate() {
   }
 
   /**
-   * Check if value from Input ,date or selectbox are missing , when yes mark them red
-   * 
-   * @param {string} field -get id from inputfield to check
+   * Marks a field red if it is empty and removes the mark if it is filled.
+   * @param {HTMLInputElement|HTMLSelectElement} field - Field to check.
    */
   function markMissingRequiredvalue(field) {
     if (field.value == '') {

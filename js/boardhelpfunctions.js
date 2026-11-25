@@ -1,5 +1,5 @@
 /**
- * Check if the requied fields input and data are filled, if no the ok button is disable
+ * Enables the OK button only if title and date are filled.
  */
 function checkRequiredfieldsEdit() {
     const inputtitle = document.getElementById('inputtitle');
@@ -16,10 +16,9 @@ function checkRequiredfieldsEdit() {
 }
 
 /**
- * Switch the state in subtasks between true or false and save it in TasksArray
- * 
- * @param {string} tasksindex - get the tasks id 
- * @param {*} subtaskindex - get the subtasks id
+ * Switches the state of a subtask and saves it.
+ * @param {number} tasksindex - Index of the task.
+ * @param {number} subtaskindex - Index of the subtask.
  */
 function isChecked(tasksindex, subtaskindex) {
     const subtask = tasks[tasksindex]['subtask'][subtaskindex];
@@ -41,9 +40,8 @@ function isChecked(tasksindex, subtaskindex) {
 }
 
 /**
- * Get all value and change the infos in old Task
- * 
- * @param {string} index - get the tasks id 
+ * Saves the edited task.
+ * @param {number} index - Index of the task.
  */
 function submitEditTask(index) {
     const currentTask = tasks[index];
@@ -63,11 +61,10 @@ function submitEditTask(index) {
 }
 
 /**
- * this function check if the current subtitle still exist in subtitles , and if it allready have a state, when yes it returns current state
- * 
- * @param {string} subtitle - search for the value from subtitle 
- * @param {string} task - current tasks informations
- * @returns 
+ * Returns the state a subtask already had before editing.
+ * @param {string} subtitle - Title of the subtask.
+ * @param {Object} task - The task before editing.
+ * @returns {boolean} The old state, or false for new subtasks.
  */
 function checkState(subtitle, task) {
 
@@ -85,9 +82,9 @@ function checkState(subtitle, task) {
 }
 
 /**
- * 
- * @param {sting} i - indexnumber to find wanted position in array
- * @param {sting} users - the current tasksarray path to assigned contacts
+ * Shows the number of assigned contacts if there are four or more.
+ * @param {number} i - Index of the task.
+ * @param {Object} users - The task with the assigned contacts.
  */
 function renderCurrentAssignedContactsNumber(i,users){
     let countAssignedContacts = document.getElementById('countassigneduseres'+i);
@@ -99,9 +96,8 @@ function renderCurrentAssignedContactsNumber(i,users){
 }
 
 /**
- * togge display from progresscontainer
- * 
- * @param {string} index - indexnumber to find wanted position in array
+ * Opens or closes the menu to change the progress of a task.
+ * @param {number} index - Index of the task.
  */
 function showProgressMenue(index) {
     const cardmenue = document.getElementById('changeprogressmenü'+index);
@@ -115,10 +111,9 @@ function showProgressMenue(index) {
 }
 
 /**
- * render the Progress.html and function posibilities into the wanted div container
- * 
- * @param {string} index -indexnumber to find wanted position in array
- * @param {*} path - dom.path to current id
+ * Renders the progress options into the menu.
+ * @param {number} index - Index of the task.
+ * @param {HTMLElement} path - Container of the menu.
  */
 function renderProgressListMenue(index,path) {
     const progressArray = ['to do','in progress','Await feedback','Done']
@@ -137,10 +132,9 @@ function renderProgressListMenue(index,path) {
 }
 
 /**
- * Change the progress in tasks to choosen progress
- * 
- * @param {string} index - indexnumber to find wanted position in array
- * @param {string} progress - get the choosen progress value
+ * Changes the progress of a task and saves it.
+ * @param {string} index - Index of the task.
+ * @param {string} progress - New progress.
  */
 function changeProgressTo(index, progress) {
     tasks[index]['progress'] = progress;
@@ -151,7 +145,7 @@ function changeProgressTo(index, progress) {
 }
 
 /**
- * Add the slideout animation to the overlaycontainer when closing
+ * Adds the slide out animation to the overlay container.
  */
 function addCloseAnimation() {
     const overlaycontainer = document.getElementById('overlaycontainer');

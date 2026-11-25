@@ -1,3 +1,6 @@
+/**
+ * Fills all values of the summary page.
+ */
 function init() {
     checkUserHaveContact();
     countAllTask();
@@ -11,10 +14,10 @@ function init() {
 }
 
 /**
- * 
- * @param {string} type wich type of progress is searched for
- * @param {*} id the id where to add the countet 
- * @returns return zero or the filtert count
+ * Counts the tasks with the given progress and shows the number.
+ * @param {string} type - Progress to count.
+ * @param {string} id - Id of the element that shows the number.
+ * @returns {string} The shown number.
  */
 function countTaskTypes(type,id) {
     const taskstype = tasks.filter(tasks => tasks.progress === type)
@@ -27,8 +30,8 @@ function countTaskTypes(type,id) {
 }
 
 /**
- * 
- * @returns Countet Tasks from Array
+ * Counts all tasks and shows the number.
+ * @returns {string} The shown number.
  */
 function countAllTask() {
     if (tasks.length === 0) {
@@ -39,8 +42,8 @@ function countAllTask() {
 }
 
 /**
- * 
- * @returns countet Urgent Tasks and the Upcoming Date
+ * Counts the urgent tasks and shows the number and the next deadline.
+ * @returns {string} The shown number.
  */
 function countUrgent() {    
     const urgentcount = tasks.filter(tasks => tasks.prio === "Urgent");
@@ -59,7 +62,7 @@ function countUrgent() {
 }
 
 /**
- * Greet massage for the loged user or guest
+ * Shows the greeting for the logged in user or guest.
  */
 function greetingUser() {
     const greeting = document.getElementById('greeting');
@@ -74,8 +77,8 @@ function greetingUser() {
 }
 
 /**
- * 
- * @returns Greeting text by current Daytime
+ * Returns a greeting that fits the current time of day.
+ * @returns {string} The greeting text.
  */
 function getDaytime() {
     const time = new Date().getHours();
@@ -92,7 +95,7 @@ function getDaytime() {
 }
 
 /**
- * Show the welcome screen once in mobile
+ * Shows the greeting screen once on small screens.
  */
 function greetMobile() {
     if (window.innerWidth <= 1150 && sessionStorage.getItem("greet") == undefined ) {
@@ -104,7 +107,7 @@ function greetMobile() {
   }
 
   /**
-   * Check if loged user have own Contact, if not create one
+   * Creates a contact for the logged in user if there is none.
    */
   function checkUserHaveContact() {
     if (user !== '') {

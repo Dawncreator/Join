@@ -4,7 +4,7 @@ let index = 1;
 let lastviewcontact = '';
 
 /**
- * Loading all needed functions onload from side
+ * Sorts and renders the contacts on page load.
  */
 function init() {
     sortContacts();
@@ -14,7 +14,7 @@ function init() {
 
 
 /**
- * function to create the small contact fields
+ * Renders the contact list.
  */
 function renderContactStripes() {
     let contactContainer = document.getElementById('contacts-register');
@@ -28,11 +28,9 @@ function renderContactStripes() {
 }
 
 /**
- * Renders the contact card for the specified index.
- * Updates the inner HTML of the contact card and sets the active contact.
- * If the contact does not exist, an error is logged to the console.
- *
- * @param {number} index - The index of the contact to be rendered.
+ * Renders the detail card of a contact.
+ * @param {number} index - Index of the contact.
+ * @returns {number|undefined} The index of the shown contact.
  */
 function renderContactCard(index) {
     let contactCard = document.getElementById('open-contact');
@@ -48,10 +46,8 @@ function renderContactCard(index) {
 }
 
 /**
- * Applies the slide-in animation to the contact card if the viewport width
- * is greater than 825 pixels.
- *
- * @param {HTMLElement} contactCard - The contact card element to animate.
+ * Plays the slide in animation of the contact card on wide screens.
+ * @param {HTMLElement} contactCard - The contact card element.
  */
 function applyAnimation(contactCard) {
     if (window.innerWidth > 825) {
@@ -62,9 +58,9 @@ function applyAnimation(contactCard) {
 }
 
 /**
- * 
- * @param {string} index -current index of contact
- * @returns - give the container display none if contact -> user
+ * Hides an element if the contact is the logged in user.
+ * @param {number} index - Index of the contact.
+ * @returns {string|undefined} Inline style that hides the element.
  */
 function checkIfContactisActualUser(index) {
     const contact = contacts[index].name;
@@ -74,10 +70,10 @@ function checkIfContactisActualUser(index) {
 }
 
 /**
- * 
- * @param {string} inputvalue - inputvalue from edit namefield
- * @param {string} index - indexnumber of contact
- * @returns 
+ * Keeps the name of the logged in user when a contact is edited.
+ * @param {string} inputvalue - Value of the name field.
+ * @param {string} index - Index of the contact.
+ * @returns {string} The name to save.
  */
 function dontRenameUser(inputvalue,index) {
     const contact = contacts[index].name
@@ -89,7 +85,7 @@ function dontRenameUser(inputvalue,index) {
 }
 
 /**
- * add vissible to the create / edit overlay and add the fade-in / out effects 
+ * Opens the create contact overlay.
  */
 function showOverlay() {
     let overlay = document.getElementById('overlay');
@@ -103,7 +99,7 @@ function showOverlay() {
 }
 
 /**
- * Close the overlay and make them insible again
+ * Closes the overlay with the slide out effect.
  */
 function closeOverlaySlide() {
     let overlay = document.getElementById('overlay');
@@ -119,10 +115,9 @@ function closeOverlaySlide() {
 }
 
 /**
- * Add fadeout effect to the overlaymenüsmall
- * 
- * @param {string} overlay - path to overlayid
- * @param {string} isMobile -check if mobile is aktive
+ * Fades out the overlay.
+ * @param {HTMLElement} overlay - The overlay element.
+ * @param {boolean} isMobile - True on small screens.
  */
 function fadeOutOverlay(overlay, isMobile) {
     overlay.classList.add('fade-out');
@@ -140,7 +135,7 @@ function fadeOutOverlay(overlay, isMobile) {
 }
 
 /**
- * close the small overlaymenü and remove fade effect
+ * Closes the overlay with the fade out effect.
  */
 function closeOverlayFade() {
     let overlay = document.getElementById('overlay');
@@ -162,8 +157,8 @@ function closeOverlayFade() {
 }
 
 /**
- *  * 
- * @param {string} overlay -dom path to overlay(id)
+ * Hides the overlay after its animation on small screens.
+ * @param {HTMLElement} overlay - The overlay element.
  */
 function handleMobileOverlay(overlay) {
     overlay.addEventListener('animationend', function handler() {
@@ -173,8 +168,8 @@ function handleMobileOverlay(overlay) {
 }
 
 /**
- * 
- * @param {*} overlay -dom path to overlay(id)
+ * Hides the overlay after a delay on wide screens.
+ * @param {HTMLElement} overlay - The overlay element.
  */
 function handleDesktopOverlay(overlay) {
     setTimeout(() => {
@@ -184,7 +179,7 @@ function handleDesktopOverlay(overlay) {
 }
 
 /**
- * Create new contact
+ * Creates a new contact from the form and saves it.
  */
 function createContact() {
     let [nameInput, mailInput, phoneInput] = ['name-input', 'mail-input', 'phone-input'].map(id => document.getElementById(id));
@@ -205,9 +200,8 @@ function createContact() {
 }
 
 /**
- * Get the Information to edit the choosen Contact
- * 
- * @param {string} index ciurrent position id in contactarray
+ * Opens the overlay to edit a contact.
+ * @param {number} index - Index of the contact.
  */
 function editContact(index) {
     let contact = contacts[index];
@@ -226,7 +220,7 @@ function editContact(index) {
 
 
 /**
- * Check if the opened Window is create contact or Edit contact and choose createt buttons
+ * Creates or saves a contact depending on the button text.
  */
 function chooseCreateOrSave() {
     let button = document.getElementById('create-save-button');
@@ -242,7 +236,7 @@ function chooseCreateOrSave() {
 }
 
 /**
- * Save the Value from edited Contact informations in contact array
+ * Saves the edited contact.
  */
 function saveContact() {
     let index = document.getElementById('contact-index').value;
@@ -264,9 +258,8 @@ function saveContact() {
 }
 
 /**
- * Delete the choosen contact from array
- * 
- * @param {string} index - Choosen Contact id for contact array
+ * Deletes a contact and removes it from all tasks.
+ * @param {number} index - Index of the contact.
  */
 function deleteContact(index) {
     ereaseContactFromArrayAssigned(index)
@@ -276,7 +269,7 @@ function deleteContact(index) {
 }
 
 /**
- * Give the smallMenü  the slide-out effect
+ * Slides the mobile edit menu out.
  */
 function toggleMenu() {
     const menu = document.getElementById('mobile-edit-menu');
@@ -284,7 +277,7 @@ function toggleMenu() {
 }
 
 /**
- * Switch the register button at with 825 to the round buttons 
+ * Switches to the contact view on small screens.
  */
 function toggleClass() {
     if (window.innerWidth <= 825) {
@@ -296,7 +289,7 @@ function toggleClass() {
 }
 
 /**
- * Show the Small edit menü when in mobile 
+ * Shows the mobile edit menu or the create overlay.
  */
 function showMobileEditMenu() {
     let popUp = document.getElementById('mobile-edit-menu');
@@ -316,7 +309,7 @@ function showMobileEditMenu() {
 }
 
 /**
- * Close the mobile edit menü
+ * Closes the mobile edit menu.
  */
 function closeMobileEditMenu() {
     let popUp = document.getElementById('mobile-edit-menu');
